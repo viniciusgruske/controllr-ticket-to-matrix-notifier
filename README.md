@@ -6,7 +6,22 @@ TUI for opening tickets in Controllr and notifying Matrix room groups using the 
 
 Fill in the local `.env` file. It is ignored by Git; `.env.example` documents the accepted values.
 
-`MATRIX_ROOMS` must be a JSON object that maps the name displayed in the TUI to a list of room IDs or aliases. The JSON may span multiple lines:
+System environment variables take precedence over values defined in `.env`.
+
+| Variable | Description | Expected value | Example |
+| --- | --- | --- | --- |
+| `CONTROLLR_URL` | Base URL of the Controllr instance used to create tickets. A trailing slash is optional. | HTTP or HTTPS URL | `https://controllr.example.com:8443` |
+| `MATRIX_URL` | Base URL of the Matrix homeserver used to send notifications. A trailing slash is optional. | HTTP or HTTPS URL | `https://matrix.example.com` |
+| `CONTROLLR_USERNAME` | Username used to authenticate with Controllr. | Non-empty text | `john.doe` |
+| `MATRIX_USERNAME` | Username used to authenticate with Matrix. | Non-empty text | `@john:example.com` |
+| `USE_SAME_PASSWORD` | Controls whether one password entry is used for both services. | `true` or `false` | `true` |
+| `CLIENT_ID` | Numeric Controllr client identifier used when opening tickets. | Integer | `24096` |
+| `DEFAULT_CATEGORY_ID` | Numeric Controllr category identifier preselected in the ticket form. | Integer | `14` |
+| `MATRIX_ROOMS` | JSON object mapping a room-group name displayed in the TUI to Matrix room IDs or aliases. | JSON object with arrays of non-empty strings | See below |
+
+When `USE_SAME_PASSWORD=true`, the same password entered in the TUI is used for Controllr and Matrix. When it is `false`, the application asks for each password separately. Passwords are never stored in `.env`.
+
+`MATRIX_ROOMS` may span multiple lines:
 
 ```env
 MATRIX_ROOMS={
@@ -14,8 +29,6 @@ MATRIX_ROOMS={
   "clients": ["#room:wsinternet.com.br"]
 }
 ```
-
-With `USE_SAME_PASSWORD=true`, the same password entered in the TUI is used for Controllr and Matrix. Passwords are never stored in `.env`.
 
 ## Running
 
