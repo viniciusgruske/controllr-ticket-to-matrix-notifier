@@ -1,0 +1,3 @@
+[submodule "brbyteapi"]
+	path = brbyteapi
+	url = https://github.com/viniciusgruske/brbyteapi

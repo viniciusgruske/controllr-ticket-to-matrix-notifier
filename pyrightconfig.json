@@ -1,0 +1,8 @@
+{
+  "include": ["main.py", "notifier.py", "tests"],
+  "exclude": [".venv", "brbyteapi"],
+  "typeCheckingMode": "strict",
+  "reportMissingTypeStubs": "none",
+  "venvPath": ".",
+  "venv": ".venv"
+}
